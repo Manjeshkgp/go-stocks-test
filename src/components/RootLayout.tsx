@@ -1,18 +1,22 @@
 "use client";
 
-import { FC, useState } from "react";
+import { FC } from "react";
 import Sidebar from "@/components/Sidebar";
+import { SidebarProvider } from "@/context/sidebarContext";
+import Header from "@/components/Header";
 
 interface RootLayoutProps {
   children: React.ReactNode;
 }
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
-  const [openSidebar,setOpenSidebar] = useState<boolean>(false);
   return (
     <>
-      <Sidebar openSidebar={openSidebar} setOpenSidebar={setOpenSidebar} />
-      <main className="" >{children}</main>
+      <SidebarProvider>
+        <Sidebar />
+        <Header/>
+        <main className="">{children}</main>
+      </SidebarProvider>
     </>
   );
 };

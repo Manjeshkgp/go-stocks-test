@@ -1,25 +1,34 @@
-import { FC } from "react";
+"use client";
+
+import { FC, useEffect, useRef } from "react";
 import { BiSolidRightArrow, BiSolidBell } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
 import { tabsData } from "@/data/data";
+import { useSidebarContext } from "@/context/sidebarContext";
+import SidebarCards from "./SidebarCards";
 
-interface SidebarProps {
-  openSidebar: boolean;
-  setOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
-}
+interface SidebarProps {}
 
-const Sidebar: FC<SidebarProps> = ({ openSidebar, setOpenSidebar }) => {
+const Sidebar: FC<SidebarProps> = ({}) => {
+  const { openSidebar, setOpenSidebar, currentTab, setCurrentTab } =
+    useSidebarContext();
   return (
     <aside
       className={twMerge(
-        "fixed left-0 top-0 bottom-0 w-[50vw] min-w-[260px] max-w-[360px] md:w-[360px] bg-blue-900 transition-all",
+        "fixed z-10 left-0 top-0 bottom-0 w-[50vw] min-w-[260px] max-w-[360px] md:w-[360px] bg-blue-900 transition-all",
         !openSidebar && "min-w-0 w-0 md:w-0",
         "flex flex-col"
       )}
     >
-      {openSidebar && (<>
-        <div className="flex justify-between items-center p-4 text-white border-b border-white font-semibold">
+      <>
+        {/* topbar and menus */}
+        <div
+          className={twMerge(
+            "flex justify-between items-center p-4 text-white border-b border-white font-semibold",
+            !openSidebar && "opacity-0"
+          )}
+        >
           <div className="flex justify-start items-center gap-3">
             <FaUserCircle className="w-10 h-10" />
             <p>Hello, User</p>
@@ -29,18 +38,17 @@ const Sidebar: FC<SidebarProps> = ({ openSidebar, setOpenSidebar }) => {
             <BiSolidBell className="w-10 h-10" />
           </div>
         </div>
-        <div className="flex flex-col overflow-y-auto gap-1 justify-start items-start py-3">
-          {tabsData.map((item,idx)=>(
-            <div key={idx} className="w-full px-3 py-1 bg-blue-950 flex justify-between items-center text-white">
-              <div className="flex justify-start items-center gap-2 cursor-pointer font-medium">
-                <item.icon className="w-4 h-4"/>
-                <p>{item.name}</p>
-              </div>
-              {item.children&&<BiSolidRightArrow className="w-3 h-3 rotate-90 cursor-pointer"/>}
-            </div>
+        <div
+          className={twMerge(
+            "flex flex-col overflow-y-auto gap-1 justify-start items-start py-3",
+            !openSidebar && "opacity-0"
+          )}
+        >
+          {tabsData.map((item, idx) => (
+            <SidebarCards item={item} key={idx} />
           ))}
         </div>
-      </>)}
+      </>
 
       <div
         className={twMerge(
