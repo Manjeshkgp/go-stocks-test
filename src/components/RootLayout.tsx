@@ -19,7 +19,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
       <main
         className={twMerge(
           "min-h-screen md:relative md:right-0 transition-all",
-          openSidebar && "md:w-[calc(100%-360px)] md:left-[360px]"
+          openSidebar && "lg:w-[calc(100%-360px)] lg:left-[360px]"
         )}
       >
         {children}

@@ -31,19 +31,19 @@ const DiscussionCard: FC<DiscussionCardProps> = ({ data }) => {
           <p>{data.description}</p>
         </div>
         <div className="flex justify-between items-center w-full md:w-[80%]">
-          <div className="flex gap-0.5 md:gap-1.5 items-center font-semibold">
+          <div className="flex gap-0.5 md:gap-1.5 items-center font-semibold cursor-pointer">
             <FaRegHeart size={18} />
             <p>{data.likes}</p>
           </div>
-          <div className="flex gap-0.5 md:gap-1.5 items-center font-semibold">
+          <div className="flex gap-0.5 md:gap-1.5 items-center font-semibold cursor-pointer">
             <FaRegEye size={18} />
             <p>{data.views}</p>
           </div>
-          <div className="flex gap-0.5 md:gap-1.5 items-center font-semibold">
+          <div className="flex gap-0.5 md:gap-1.5 items-center font-semibold cursor-pointer">
             <BiCommentDetail size={18} />
             <p>{data.comments}</p>
           </div>
-          <div className="flex gap-0.5 md:gap-1.5 items-center font-semibold">
+          <div className="flex gap-0.5 md:gap-1.5 items-center font-semibold cursor-pointer">
             <LuShare2 size={18} />
             <p>Share</p>
           </div>
